@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menibuks — Wadah E-Book Gratis dengan Beragam Pilihan Genre</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Syne, Space Grotesk, Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        brand: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: {
+                            50: '#fcfbf8',
+                            100: '#f6f4ee', // Primary Cream/Light Grey Background
+                            200: '#ece7db',
+                            300: '#dfd7c4',
+                            800: '#3a3428',
+                        },
+                        purpleTheme: {
+                            500: '#6b5296',
+                            600: '#4a3869',
+                            800: '#2c1e43',
+                            900: '#1d122e',
+                        },
+                        sage: {
+                            100: '#e2eae5',
+                            500: '#4a7c64',
+                            600: '#3d6b56',
+                            800: '#203d30',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f6f4ee;
+            color: #1d122e;
+        }
+
+        /* ArtCraft Concentric Circles Background Background */
+        .artcraft-bg {
+            background-image: 
+                radial-gradient(circle at 50% 35%, rgba(74, 56, 105, 0.08) 0%, rgba(246, 244, 238, 0) 65%),
+                radial-gradient(circle at 80% 20%, rgba(61, 107, 86, 0.08) 0%, rgba(246, 244, 238, 0) 50%);
+        }
+
+        .ring-circles {
+            background-image: radial-gradient(circle, rgba(44, 30, 67, 0.06) 1px, transparent 1px);
+            background-size: 36px 36px;
+        }
+
+        /* Interactive Animated Owl Mascot Styles */
+        .owl-body {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .owl-container:hover .owl-body {
+            transform: translateY(-8px) scale(1.03);
+        }
+        .owl-eye {
+            transform-origin: center;
+            animation: blink 4.5s infinite;
+        }
+        .owl-wing-left {
+            transform-origin: top right;
+            animation: wingFlap 3s ease-in-out infinite;
+        }
+        .owl-wing-right {
+            transform-origin: top left;
+            animation: wingFlapRight 3s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+        @keyframes wingFlap {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-8deg); }
+        }
+        @keyframes wingFlapRight {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(8deg); }
+        }
+
+        /* Floating Orbiting Book Cards */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(-3deg); }
+        }
+        .float-card-1 { animation: floatSlow 6s ease-in-out infinite; }
+        .float-card-2 { animation: floatReverse 7s ease-in-out infinite; }
+        .float-card-3 { animation: floatSlow 8s ease-in-out infinite 1s; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f6f4ee; }
+        ::-webkit-scrollbar-thumb { background: #dfd7c4; border-radius: 6px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3d6b56; }
+
+        /* Modal Blur */
+        .modal-backdrop {
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease-in-out;
+        }
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-purpleTheme-600 selection:text-white">
+
+    <!-- ==================== HEADER NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 bg-cream-100/90 backdrop-blur-md border-b border-cream-300/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="navigateTo('home')">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-purpleTheme-600 to-sage-600 flex items-center justify-center text-white text-xl font-bold shadow-md shadow-purpleTheme-600/20 group-hover:scale-105 transition">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                </div>
+                <div>
+                    <span class="font-display font-extrabold text-2xl tracking-tight text-purpleTheme-900">menibuks</span>
+                    <span class="block text-[9px] uppercase font-bold tracking-widest text-sage-600 -mt-1">Digital Library</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-1 bg-white/80 p-1.5 rounded-full border border-cream-300/80 shadow-sm overflow-x-auto">
+                <button onclick="navigateTo('home')" id="nav-home" class="px-4 py-2 rounded-full text-xs font-bold text-white bg-purpleTheme-600 shadow-sm transition">Beranda</button>
+                <button onclick="navigateTo('katalog')" id="nav-katalog" class="px-4 py-2 rounded-full text-xs font-bold text-purpleTheme-900/70 hover:text-purpleTheme-900 transition">Katalog Buku</button>
+                <button onclick="navigateTo('author')" id="nav-author" class="px-4 py-2 rounded-full text-xs font-bold text-purpleTheme-900/70 hover:text-purpleTheme-900 transition">Author</button>
+                <button onclick="navigateTo('penerbit')" id="nav-penerbit" class="px-4 py-2 rounded-full text-xs font-bold text-purpleTheme-900/70 hover:text-purpleTheme-900 transition">Penerbit</button>
+                <button onclick="navigateTo('member')" id="nav-member" class="px-4 py-2 rounded-full text-xs font-bold text-purpleTheme-900/70 hover:text-purpleTheme-900 transition">Anggota</button>
+                <button onclick="navigateTo('peminjaman')" id="nav-peminjaman" class="px-4 py-2 rounded-full text-xs font-bold text-purpleTheme-900/70 hover:text-purpleTheme-900 transition">Peminjaman</button>
+            </nav>
+
+            <!-- Top Right Corner Action: Login / User Profile Area -->
+            <div id="auth-header-area" class="relative flex items-center gap-3">
+                <button onclick="openAuthModal('login')" class="bg-purpleTheme-900 hover:bg-purpleTheme-800 text-cream-50 font-brand font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-2xl shadow-md hover:shadow-lg transition flex items-center gap-2.5 transform active:scale-95 border border-purpleTheme-800">
+                    <i class="fa-solid fa-arrow-right-to-bracket text-sage-500"></i>
+                    <span>MASUK / DAFTAR</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+    <main class="flex-1">
+
+        <!-- ================= PAGE 1: BERANDA / LANDING HERO ================= -->
+        <section id="page-home" class="relative artcraft-bg ring-circles pt-8 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-center">
+            
+            <!-- FLOATING BOOK CARDS (Left & Right - ArtCraft Reference Vibe) -->
+            <div class="hidden xl:block absolute left-8 top-1/4 float-card-1 opacity-90 hover:opacity-100 transition z-10">
+                <div class="w-48 bg-white border border-cream-300 p-3 rounded-2xl shadow-xl hover:shadow-2xl transition cursor-pointer" onclick="openBookDetail(1)">
+                    <img src="https://images.unsplash.com/photo-1618666012174-83b441c0bc76?w=400&auto=format&fit=crop&q=80" alt="Harry Potter" class="w-full h-56 object-cover rounded-xl mb-2">
+                    <span class="text-[9px] font-extrabold px-2 py-0.5 rounded bg-purpleTheme-500/10 text-purpleTheme-600 uppercase">Fantasy</span>
+                    <p class="text-xs font-bold text-purpleTheme-900 truncate mt-1">Harry Potter & Sorcerer Stone</p>
+                    <p class="text-[10px] text-sage-600">J.K. Rowling</p>
+                </div>
+            </div>
+
+            <div class="hidden xl:block absolute right-10 top-1/3 float-card-2 opacity-90 hover:opacity-100 transition z-10">
+                <div class="w-48 bg-white border border-cream-300 p-3 rounded-2xl shadow-xl hover:shadow-2xl transition cursor-pointer" onclick="openBookDetail(2)">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80" alt="Percy Jackson" class="w-full h-56 object-cover rounded-xl mb-2">
+                    <span class="text-[9px] font-extrabold px-2 py-0.5 rounded bg-sage-500/10 text-sage-600 uppercase">Mythology</span>
+                    <p class="text-xs font-bold text-purpleTheme-900 truncate mt-1">Percy Jackson & The Lightning Thief</p>
+                    <p class="text-[10px] text-sage-600">Rick Riordan</p>
+                </div>
+            </div>
+
+            <div class="hidden xl:block absolute left-16 bottom-12 float-card-3 opacity-90 hover:opacity-100 transition z-10">
+                <div class="w-44 bg-white border border-cream-300 p-3 rounded-2xl shadow-xl hover:shadow-2xl transition cursor-pointer" onclick="openBookDetail(3)">
+                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&auto=format&fit=crop&q=80" alt="Pulang" class="w-full h-48 object-cover rounded-xl mb-2">
+                    <p class="text-xs font-bold text-purpleTheme-900 truncate">Pulang</p>
+                    <p class="text-[10px] text-sage-600">Tere Liye</p>
+                </div>
+            </div>
+
+            <!-- HERO CENTER CONTAINER -->
+            <div class="max-w-4xl mx-auto text-center relative z-20 space-y-6">
+                
+                <!-- STYLISH OWL MASCOT SVG (Interactive Hover & Motion) -->
+                <div class="owl-container inline-block cursor-pointer group" onclick="owlSayHello()" title="Halo! Aku Bubo, Maskot Menibuks!">
+                    <svg class="w-28 h-28 sm:w-36 sm:h-36 mx-auto drop-shadow-xl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g class="owl-body">
+                            <path d="M50 50L75 80H125L150 50L135 90C135 90 160 130 140 160C120 190 80 190 60 160C40 130 65 90 65 90L50 50Z" fill="#3D6B56" />
+                            <ellipse cx="100" cy="125" rx="50" ry="55" fill="#4A3869" />
+                            <ellipse cx="100" cy="135" rx="34" ry="38" fill="#F6F4EE" />
+                            <path d="M90 120Q100 125 110 120M85 135Q100 142 115 135M92 150Q100 155 108 150" stroke="#3D6B56" stroke-width="3" stroke-linecap="round" />
+                            <path class="owl-wing-left" d="M52 105C40 120 42 145 58 155C62 140 60 120 52 105Z" fill="#2C1E43" />
+                            <path class="owl-wing-right" d="M148 105C160 120 158 145 142 155C138 140 140 120 148 105Z" fill="#2C1E43" />
+                            <path d="M60 65L100 48L140 65L100 82L60 65Z" fill="#1D122E" />
+                            <rect x="85" y="42" width="30" height="12" rx="3" fill="#3D6B56" />
+                            <path d="M140 65V90" stroke="#E2EAE5" stroke-width="3" stroke-linecap="round" />
+                            <circle cx="140" cy="93" r="4" fill="#E2EAE5" />
+                            <circle cx="78" cy="95" r="22" fill="#F6F4EE" stroke="#3D6B56" stroke-width="4" />
+                            <circle cx="122" cy="95" r="22" fill="#F6F4EE" stroke="#3D6B56" stroke-width="4" />
+                            <g class="owl-eye">
+                                <circle cx="80" cy="95" r="11" fill="#1D122E" />
+                                <circle cx="76" cy="91" r="4" fill="white" />
+                                <circle cx="120" cy="95" r="11" fill="#1D122E" />
+                                <circle cx="116" cy="91" r="4" fill="white" />
+                            </g>
+                            <polygon points="95,104 105,104 100,116" fill="#E2AE46" />
+                            <ellipse cx="82" cy="180" rx="8" ry="4" fill="#E2AE46" />
+                            <ellipse cx="118" cy="180" rx="8" ry="4" fill="#E2AE46" />
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Speech Bubble for Mascot -->
+                <div id="mascot-bubble" class="inline-block bg-white border border-sage-500/30 px-4 py-1.5 rounded-full text-xs font-bold text-sage-800 shadow-sm animate-bounce">
+                    🦉 "Klik aku untuk menyapa! Selamat datang di menibuks."
+                </div>
+
+                <h1 class="font-display text-5xl sm:text-7xl font-extrabold tracking-tight text-purpleTheme-900 uppercase leading-tight">
+                    MENIBUKS
+                </h1>
+
+                <p class="text-lg sm:text-2xl text-purpleTheme-800/80 max-w-2xl mx-auto font-medium leading-relaxed">
+                    wadah e-book gratis dengan beragam pilihan genre
+                </p>
+
+                <!-- Search Input Container -->
+                <div class="pt-2 max-w-xl mx-auto">
+                    <div class="relative bg-white/90 p-2 rounded-2xl border border-cream-300 shadow-xl flex items-center gap-2 backdrop-blur-md">
+                        <i class="fa-solid fa-magnifying-glass text-sage-600 text-lg ml-3"></i>
+                        <input type="text" id="hero-search-input" placeholder="Cari judul buku, penulis, atau genre..." class="w-full bg-transparent text-sm text-purpleTheme-900 placeholder-purpleTheme-900/40 focus:outline-none px-2 py-1">
+                        <button onclick="performHeroSearch()" class="bg-sage-600 hover:bg-sage-500 text-white px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-md">
+                            Cari
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                    <button onclick="navigateTo('katalog')" class="bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white font-bold px-8 py-3.5 rounded-2xl text-sm transition shadow-lg shadow-purpleTheme-600/20 flex items-center gap-2.5">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>Jelajahi Semua E-Book</span>
+                    </button>
+                    <button onclick="openAuthModal('signup')" class="bg-white hover:bg-cream-50 text-purpleTheme-900 border border-cream-300 font-bold px-8 py-3.5 rounded-2xl text-sm transition flex items-center gap-2.5 shadow-sm">
+                        <i class="fa-solid fa-user-plus text-sage-600"></i>
+                        <span>Daftar Akun Gratis</span>
+                    </button>
+                </div>
+
+                <!-- Quick Genre Tags -->
+                <div class="pt-6 flex flex-wrap justify-center items-center gap-2 text-xs text-purpleTheme-900/60">
+                    <span class="font-bold text-sage-600 uppercase tracking-wider text-[11px]">Genre Populer:</span>
+                    <button onclick="filterByGenre('fantasy')" class="px-3.5 py-1.5 rounded-xl bg-white border border-cream-300 hover:border-purpleTheme-600 font-semibold transition">Fantasy</button>
+                    <button onclick="filterByGenre('fiction')" class="px-3.5 py-1.5 rounded-xl bg-white border border-cream-300 hover:border-purpleTheme-600 font-semibold transition">Fiction</button>
+                    <button onclick="filterByGenre('mythology')" class="px-3.5 py-1.5 rounded-xl bg-white border border-cream-300 hover:border-purpleTheme-600 font-semibold transition">Mythology</button>
+                    <button onclick="filterByGenre('selfhelp')" class="px-3.5 py-1.5 rounded-xl bg-white border border-cream-300 hover:border-purpleTheme-600 font-semibold transition">Self Help</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2: KATALOG BUKU (WITH CRUD) ================= -->
+        <section id="page-katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 hidden space-y-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-cream-300">
+                <div>
+                    <h2 class="font-display text-3xl font-extrabold text-purpleTheme-900">Katalog E-Book</h2>
+                    <p class="text-xs text-purpleTheme-800/70 mt-1">Pilihan lengkap e-book berkualitas yang dapat Anda baca secara gratis</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button onclick="openBookModal('add')" class="bg-sage-600 hover:bg-sage-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-plus"></i> Tambah Buku Baru
+                    </button>
+                    <!-- Filter Buttons -->
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <button onclick="setCatalogFilter('all')" id="btn-filter-all" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-purpleTheme-600 text-white shadow-sm transition">Semua</button>
+                        <button onclick="setCatalogFilter('fantasy')" id="btn-filter-fantasy" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-purpleTheme-900 border border-cream-300 hover:bg-cream-200 transition">Fantasy</button>
+                        <button onclick="setCatalogFilter('fiction')" id="btn-filter-fiction" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-purpleTheme-900 border border-cream-300 hover:bg-cream-200 transition">Fiction</button>
+                        <button onclick="setCatalogFilter('mythology')" id="btn-filter-mythology" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-purpleTheme-900 border border-cream-300 hover:bg-cream-200 transition">Mythology</button>
+                        <button onclick="setCatalogFilter('selfhelp')" id="btn-filter-selfhelp" class="cat-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-purpleTheme-900 border border-cream-300 hover:bg-cream-200 transition">Self Help</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Grid (Rendered via JS) -->
+            <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Dynamic Content Here -->
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: AUTHOR / PENULIS (CRUD) ================= -->
+        <section id="page-author" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 hidden space-y-6">
+            <div class="flex justify-between items-center pb-6 border-b border-cream-300">
+                <div>
+                    <h2 class="font-display text-3xl font-extrabold text-purpleTheme-900">Data Author (Penulis)</h2>
+                    <p class="text-xs text-purpleTheme-800/70 mt-1">Kelola master data penulis e-book di platform menibuks</p>
+                </div>
+                <button onclick="openAuthorModal('add')" class="bg-sage-600 hover:bg-sage-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-user-pen"></i> Tambah Author
+                </button>
+            </div>
+
+            <div class="bg-white border border-cream-300 rounded-2xl overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-cream-200/60 border-b border-cream-300 text-[11px] font-extrabold text-purpleTheme-900 uppercase tracking-wider">
+                                <th class="p-4">ID Author</th>
+                                <th class="p-4">Nama Author</th>
+                                <th class="p-4">Alamat</th>
+                                <th class="p-4">Kontak / No Telp</th>
+                                <th class="p-4">Email</th>
+                                <th class="p-4 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="authors-table-body" class="divide-y divide-cream-200 text-sm">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: PENERBIT / PUBLISHER (CRUD) ================= -->
+        <section id="page-penerbit" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 hidden space-y-6">
+            <div class="flex justify-between items-center pb-6 border-b border-cream-300">
+                <div>
+                    <h2 class="font-display text-3xl font-extrabold text-purpleTheme-900">Data Penerbit</h2>
+                    <p class="text-xs text-purpleTheme-800/70 mt-1">Kelola master data perusahaan / institusi penerbit buku</p>
+                </div>
+                <button onclick="openPublisherModal('add')" class="bg-sage-600 hover:bg-sage-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-building"></i> Tambah Penerbit
+                </button>
+            </div>
+
+            <div class="bg-white border border-cream-300 rounded-2xl overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-cream-200/60 border-b border-cream-300 text-[11px] font-extrabold text-purpleTheme-900 uppercase tracking-wider">
+                                <th class="p-4">ID Penerbit</th>
+                                <th class="p-4">Nama Penerbit</th>
+                                <th class="p-4">Alamat</th>
+                                <th class="p-4">Kontak</th>
+                                <th class="p-4">Email</th>
+                                <th class="p-4 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="publishers-table-body" class="divide-y divide-cream-200 text-sm">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 5: ANGGOTA / MEMBER (CRUD) ================= -->
+        <section id="page-member" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 hidden space-y-6">
+            <div class="flex justify-between items-center pb-6 border-b border-cream-300">
+                <div>
+                    <h2 class="font-display text-3xl font-extrabold text-purpleTheme-900">Data Anggota Perpustakaan</h2>
+                    <p class="text-xs text-purpleTheme-800/70 mt-1">Daftar pengguna terdaftar di platform menibuks</p>
+                </div>
+                <button onclick="openMemberModal('add')" class="bg-sage-600 hover:bg-sage-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-user-plus"></i> Registrasi Anggota Baru
+                </button>
+            </div>
+
+            <div class="bg-white border border-cream-300 rounded-2xl overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-cream-200/60 border-b border-cream-300 text-[11px] font-extrabold text-purpleTheme-900 uppercase tracking-wider">
+                                <th class="p-4">Kode Member</th>
+                                <th class="p-4">No KTP</th>
+                                <th class="p-4">Nama Lengkap</th>
+                                <th class="p-4">Username / Email</th>
+                                <th class="p-4">No. Telp & Alamat</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="members-table-body" class="divide-y divide-cream-200 text-sm">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 6: SIRKULASI PEMINJAMAN, PENGEMBALIAN & DENDA ================= -->
+        <section id="page-peminjaman" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 hidden space-y-6">
+            <div class="flex justify-between items-center pb-6 border-b border-cream-300">
+                <div>
+                    <h2 class="font-display text-3xl font-extrabold text-purpleTheme-900">Sirkulasi Peminjaman & Pengembalian</h2>
+                    <p class="text-xs text-purpleTheme-800/70 mt-1">Daftar sirkulasi peminjaman, proses pengembalian, dan pencatatan denda</p>
+                </div>
+                <button onclick="openModal('modal-loan')" class="bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-plus"></i> Transaksi Peminjaman Baru
+                </button>
+            </div>
+
+            <div class="bg-white border border-cream-300 rounded-2xl overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-cream-200/60 border-b border-cream-300 text-[11px] font-extrabold text-purpleTheme-900 uppercase tracking-wider">
+                                <th class="p-4">No. Peminjaman</th>
+                                <th class="p-4">Anggota</th>
+                                <th class="p-4">Buku Dipinjam</th>
+                                <th class="p-4">Tgl Pinjam / Kembali</th>
+                                <th class="p-4">Status & Denda</th>
+                                <th class="p-4 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="loans-table-body" class="divide-y divide-cream-200 text-sm">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-cream-300/80 bg-cream-50 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:items-center space-y-4 sm:space-y-0">
+            <div class="flex items-center justify-center sm:justify-start gap-2.5">
+                <div class="w-7 h-7 rounded-lg bg-purpleTheme-600 flex items-center justify-center text-white text-xs font-bold">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                </div>
+                <span class="font-display font-extrabold text-purpleTheme-900 text-lg tracking-tight">menibuks</span>
+            </div>
+            <p class="text-xs text-purpleTheme-800/60 font-medium">wadah e-book gratis dengan beragam pilihan genre. &copy; 2026 menibuks.</p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL 1: AUTHENTICATION (LOGIN & SIGN UP) ==================== -->
+    <div id="modal-auth" class="modal-backdrop fixed inset-0 bg-purpleTheme-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-cream-100 border border-cream-300 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative space-y-5">
+            <button onclick="closeModal('modal-auth')" class="absolute top-5 right-5 text-purpleTheme-900/50 hover:text-purpleTheme-900 text-lg transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Toggle Tab -->
+            <div class="flex bg-cream-200 p-1 rounded-2xl border border-cream-300">
+                <button onclick="switchAuthTab('login')" id="tab-login" class="flex-1 py-2.5 rounded-xl text-xs font-bold transition text-white bg-purpleTheme-600 shadow-sm">MASUK</button>
+                <button onclick="switchAuthTab('signup')" id="tab-signup" class="flex-1 py-2.5 rounded-xl text-xs font-bold transition text-purpleTheme-900/70 hover:text-purpleTheme-900">DAFTAR AKUN</button>
+            </div>
+
+            <!-- Header Description -->
+            <div class="text-center space-y-1">
+                <h3 id="auth-title" class="font-display text-2xl font-extrabold text-purpleTheme-900">Selamat Datang kembali</h3>
+                <p id="auth-subtitle" class="text-xs text-purpleTheme-800/70">Masukkan kredensial Anda untuk mengakses perpustakaan</p>
+            </div>
+
+            <!-- Combined Form for Inputs -->
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-3.5">
+                <div id="field-nama" class="hidden">
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Nama Lengkap</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-sage-600 text-xs"></i>
+                        <input type="text" id="auth-nama" placeholder="Contoh: Dilla Salsabila" class="w-full bg-white border border-cream-300 rounded-xl py-2.5 pl-9 pr-3 text-xs text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                    </div>
+                </div>
+
+                <div id="field-username">
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Username / ID</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-at absolute left-3.5 top-3.5 text-sage-600 text-xs"></i>
+                        <input type="text" id="auth-username" required placeholder="dillasalsa" class="w-full bg-white border border-cream-300 rounded-xl py-2.5 pl-9 pr-3 text-xs text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                    </div>
+                </div>
+
+                <div id="field-email" class="hidden">
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Alamat Email</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-sage-600 text-xs"></i>
+                        <input type="email" id="auth-email" placeholder="heydel@gmail.com" class="w-full bg-white border border-cream-300 rounded-xl py-2.5 pl-9 pr-3 text-xs text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Kata Sandi</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-sage-600 text-xs"></i>
+                        <input type="password" id="auth-password" required placeholder="••••••••" class="w-full bg-white border border-cream-300 rounded-xl py-2.5 pl-9 pr-3 text-xs text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                    </div>
+                </div>
+
+                <button type="submit" id="auth-btn-submit" class="w-full bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md mt-2">
+                    Masuk Sekarang
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 2: SETTING PROFIL (USER / ADMIN) ==================== -->
+    <div id="modal-profile" class="modal-backdrop fixed inset-0 bg-purpleTheme-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-cream-100 border border-cream-300 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative space-y-4">
+            <button onclick="closeModal('modal-profile')" class="absolute top-5 right-5 text-purpleTheme-900/50 hover:text-purpleTheme-900 text-lg transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center space-y-1">
+                <div class="w-16 h-16 rounded-full bg-purpleTheme-600 text-white flex items-center justify-center font-extrabold text-xl mx-auto shadow-md" id="profile-avatar-icon">
+                    DS
+                </div>
+                <h3 class="font-display text-2xl font-extrabold text-purpleTheme-900 pt-2">Setelan Profil</h3>
+                <p class="text-xs text-purpleTheme-800/70">Perbarui informasi akun dan kata sandi Anda</p>
+            </div>
+
+            <form onsubmit="handleProfileUpdate(event)" class="space-y-3 pt-2">
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Nama Lengkap</label>
+                    <input type="text" id="prof-nama" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-xs text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Username</label>
+                    <input type="text" id="prof-username" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-xs text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Email</label>
+                    <input type="email" id="prof-email" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-xs text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Kata Sandi Baru (Opsional)</label>
+                    <input type="password" id="prof-password" placeholder="Kosongkan jika tidak diubah" class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-xs text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                </div>
+                
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="logoutUser()" class="w-1/3 bg-red-100 text-red-700 hover:bg-red-200 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition">Keluar</button>
+                    <button type="submit" class="w-2/3 bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 3: DETAIL BUKU ==================== -->
+    <div id="modal-book-detail" class="modal-backdrop fixed inset-0 bg-purpleTheme-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-cream-100 border border-cream-300 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative space-y-4">
+            <button onclick="closeModal('modal-book-detail')" class="absolute top-4 right-4 text-purpleTheme-900/50 hover:text-purpleTheme-900 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex flex-col sm:flex-row gap-5 pt-2">
+                <img id="detail-img" src="" alt="Cover" class="w-36 h-48 object-cover rounded-2xl border border-cream-300 shadow-md mx-auto sm:mx-0">
+                <div class="space-y-2 flex-1 text-center sm:text-left">
+                    <span id="detail-genre" class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-sage-100 text-sage-800 border border-sage-500/20 uppercase">Genre</span>
+                    <h3 id="detail-title" class="font-display text-xl font-extrabold text-purpleTheme-900 leading-tight">Judul Buku</h3>
+                    <p id="detail-author" class="text-xs text-sage-600 font-bold">Penulis</p>
+                    <p id="detail-publisher" class="text-[11px] text-purpleTheme-800/70 font-medium">Penerbit</p>
+                    <div class="pt-2 text-xs text-purpleTheme-800/80 space-y-1">
+                        <p>ISBN: <span id="detail-isbn" class="font-mono text-purpleTheme-900 font-bold">12345678</span></p>
+                        <p>Tahun: <span id="detail-year" class="text-purpleTheme-900 font-bold">2023</span></p>
+                        <p>Stok Tersedia: <span id="detail-stock" class="text-sage-600 font-extrabold">10 Eks.</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-3 border-t border-cream-300">
+                <p class="text-xs font-extrabold text-purpleTheme-900 mb-1">Sinopsis E-Book:</p>
+                <p id="detail-desc" class="text-xs text-purpleTheme-800/80 leading-relaxed">Deskripsi lengkap buku akan tampil di sini.</p>
+            </div>
+
+            <div class="pt-2 flex justify-end gap-3">
+                <button onclick="closeModal('modal-book-detail')" class="px-4 py-2.5 rounded-xl text-xs font-bold text-purpleTheme-800/70 hover:text-purpleTheme-900 transition">Tutup</button>
+                <button id="btn-borrow-now" class="bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition shadow-md">
+                    Pinjam E-Book Ini
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 4: FORM TAMBAH / EDIT BUKU (CRUD) ==================== -->
+    <div id="modal-book-form" class="modal-backdrop fixed inset-0 bg-purpleTheme-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-cream-100 border border-cream-300 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative space-y-4 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-book-form')" class="absolute top-4 right-4 text-purpleTheme-900/50 hover:text-purpleTheme-900 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 id="book-form-title" class="font-display text-2xl font-extrabold text-purpleTheme-900">Tambah Buku Baru</h3>
+
+            <form onsubmit="handleBookFormSubmit(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="bf-id">
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Judul Buku</label>
+                    <input type="text" id="bf-title" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">ISBN</label>
+                        <input type="text" id="bf-isbn" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Genre / Kategori</label>
+                        <select id="bf-genre" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                            <option value="fantasy">Fantasy</option>
+                            <option value="fiction">Fiction</option>
+                            <option value="mythology">Mythology</option>
+                            <option value="selfhelp">Self Help</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Author (Penulis)</label>
+                        <select id="bf-author" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                            <!-- Populated via JS -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Penerbit</label>
+                        <select id="bf-publisher" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none focus:border-purpleTheme-600">
+                            <!-- Populated via JS -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Thn Terbit</label>
+                        <input type="number" id="bf-year" required value="2023" class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Stok Total</label>
+                        <input type="number" id="bf-stock" required value="10" class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Stok Ada</label>
+                        <input type="number" id="bf-avail" required value="10" class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">URL Sampul/Gambar</label>
+                    <input type="url" id="bf-image" required placeholder="https://..." class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Sinopsis / Deskripsi</label>
+                    <textarea id="bf-desc" rows="3" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md mt-2">
+                    Simpan Data Buku
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 5: FORM AUTHOR (CRUD) ==================== -->
+    <div id="modal-author-form" class="modal-backdrop fixed inset-0 bg-purpleTheme-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-cream-100 border border-cream-300 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
+            <button onclick="closeModal('modal-author-form')" class="absolute top-4 right-4 text-purpleTheme-900/50 hover:text-purpleTheme-900 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 id="author-form-title" class="font-display text-2xl font-extrabold text-purpleTheme-900">Tambah Author</h3>
+
+            <form onsubmit="handleAuthorFormSubmit(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="af-id">
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Nama Author</label>
+                    <input type="text" id="af-nama" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Alamat</label>
+                    <input type="text" id="af-alamat" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Kontak/No Telp</label>
+                        <input type="text" id="af-kontak" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Email</label>
+                        <input type="email" id="af-email" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md mt-2">
+                    Simpan Data Author
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 6: FORM PENERBIT (CRUD) ==================== -->
+    <div id="modal-publisher-form" class="modal-backdrop fixed inset-0 bg-purpleTheme-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-cream-100 border border-cream-300 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
+            <button onclick="closeModal('modal-publisher-form')" class="absolute top-4 right-4 text-purpleTheme-900/50 hover:text-purpleTheme-900 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 id="publisher-form-title" class="font-display text-2xl font-extrabold text-purpleTheme-900">Tambah Penerbit</h3>
+
+            <form onsubmit="handlePublisherFormSubmit(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="pf-id">
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Nama Penerbit</label>
+                    <input type="text" id="pf-nama" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Alamat</label>
+                    <input type="text" id="pf-alamat" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Kontak</label>
+                        <input type="text" id="pf-kontak" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Email</label>
+                        <input type="email" id="pf-email" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md mt-2">
+                    Simpan Data Penerbit
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 7: FORM MEMBER / ANGGOTA (CRUD) ==================== -->
+    <div id="modal-member-form" class="modal-backdrop fixed inset-0 bg-purpleTheme-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-cream-100 border border-cream-300 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-member-form')" class="absolute top-4 right-4 text-purpleTheme-900/50 hover:text-purpleTheme-900 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 id="member-form-title" class="font-display text-2xl font-extrabold text-purpleTheme-900">Registrasi Anggota</h3>
+
+            <form onsubmit="handleMemberFormSubmit(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="mf-id">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Kode Anggota</label>
+                        <input type="text" id="mf-code" required readonly class="w-full bg-cream-200 border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 font-mono font-bold">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">No KTP</label>
+                        <input type="text" id="mf-ktp" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Nama Lengkap</label>
+                    <input type="text" id="mf-nama" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Username</label>
+                        <input type="text" id="mf-username" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Email</label>
+                        <input type="email" id="mf-email" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">No Telp</label>
+                        <input type="text" id="mf-telp" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Tanggal Lahir</label>
+                        <input type="date" id="mf-dob" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Alamat Lengkap</label>
+                    <input type="text" id="mf-alamat" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Status Anggota</label>
+                    <select id="mf-status" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                        <option value="Aktif">Aktif</option>
+                        <option value="Nonaktif">Nonaktif</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md mt-2">
+                    Simpan Data Anggota
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 8: FORM PEMINJAMAN ==================== -->
+    <div id="modal-loan" class="modal-backdrop fixed inset-0 bg-purpleTheme-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-cream-100 border border-cream-300 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
+            <button onclick="closeModal('modal-loan')" class="absolute top-4 right-4 text-purpleTheme-900/50 hover:text-purpleTheme-900 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="font-display text-2xl font-extrabold text-purpleTheme-900">Form Peminjaman E-Book</h3>
+
+            <form onsubmit="handleLoanSubmit(event)" class="space-y-4 pt-1">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Pilih Anggota</label>
+                    <select id="loan-member-select" required class="w-full bg-white border border-cream-300 rounded-xl p-3 text-xs text-purpleTheme-900 font-medium focus:outline-none focus:border-purpleTheme-600">
+                        <!-- Filled dynamically -->
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Pilih Buku</label>
+                    <select id="loan-book-select" required class="w-full bg-white border border-cream-300 rounded-xl p-3 text-xs text-purpleTheme-900 font-medium focus:outline-none focus:border-purpleTheme-600">
+                        <!-- Filled dynamically -->
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Tgl Pinjam</label>
+                        <input type="date" id="loan-start" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-xs text-purpleTheme-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purpleTheme-900/70 mb-1">Tgl Kembali Rencana</label>
+                        <input type="date" id="loan-end" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-xs text-purpleTheme-900 focus:outline-none">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md">
+                    Konfirmasi Peminjaman
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 9: PROSES PENGEMBALIAN & DENDA ==================== -->
+    <div id="modal-return" class="modal-backdrop fixed inset-0 bg-purpleTheme-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-cream-100 border border-cream-300 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
+            <button onclick="closeModal('modal-return')" class="absolute top-4 right-4 text-purpleTheme-900/50 hover:text-purpleTheme-900 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="font-display text-2xl font-extrabold text-purpleTheme-900">Proses Pengembalian</h3>
+
+            <form onsubmit="handleReturnSubmit(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="rf-loan-id">
+                <div class="p-3 bg-white border border-cream-300 rounded-xl space-y-1">
+                    <p class="font-bold text-purpleTheme-900" id="rf-info-member">Member: -</p>
+                    <p class="text-purpleTheme-800" id="rf-info-book">Buku: -</p>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Tanggal Dikembalikan</label>
+                    <input type="date" id="rf-date" required onchange="calculateFine()" class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Kondisi Buku</label>
+                    <select id="rf-condition" onchange="calculateFine()" required class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                        <option value="Baik">Baik / Utuh</option>
+                        <option value="Rusak">Rusak (+Rp 15.000)</option>
+                        <option value="Hilang">Hilang (+Rp 50.000)</option>
+                    </select>
+                </div>
+
+                <div class="p-3 bg-cream-200/60 border border-cream-300 rounded-xl space-y-1">
+                    <div class="flex justify-between font-bold">
+                        <span>Total Denda:</span>
+                        <span id="rf-fine-display" class="text-red-600 font-mono">Rp 0</span>
+                    </div>
+                    <p class="text-[10px] text-purpleTheme-800/70 leading-tight">Denda keterlambatan: Rp 2.000 / hari keterlambatan.</p>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Status Pembayaran Denda</label>
+                    <select id="rf-pay-status" class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                        <option value="Tidak Ada Denda">Tidak Ada Denda</option>
+                        <option value="Lunas">Lunas</option>
+                        <option value="Belum Lunas">Belum Lunas</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-purpleTheme-900/70 mb-1 uppercase">Metode Pembayaran</label>
+                    <select id="rf-pay-method" class="w-full bg-white border border-cream-300 rounded-xl p-2.5 text-purpleTheme-900 focus:outline-none">
+                        <option value="-">-</option>
+                        <option value="Cash / Tunai">Cash / Tunai</option>
+                        <option value="QRIS / Transfer">QRIS / Transfer</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-sage-600 hover:bg-sage-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition shadow-md mt-2">
+                    Selesaikan Pengembalian
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // DATA STATE (Aligned with ERD Tables)
+
+        let currentUser = {
+            id: 1,
+            nama: "Dilla Salsabila",
+            username: "dillasalsa",
+            email: "heydel@gmail.com",
+            role: "Admin"
+        };
+
+        let authors = [
+            { id: 1, nama: "J.K. Rowling", alamat: "Edinburgh, UK", kontak: "+44 131 496 0000", email: "jkrowling@authors.com" },
+            { id: 2, nama: "Rick Riordan", alamat: "Texas, USA", kontak: "+1 512 555 0192", email: "rick@rickriordan.com" },
+            { id: 3, nama: "Tere Liye", alamat: "Bandung, Indonesia", kontak: "0812 3456 7890", email: "tereliye@writer.id" },
+            { id: 4, nama: "Andrea Hirata", alamat: "Belitung, Indonesia", kontak: "0813 9876 5432", email: "andrea@hirata.com" },
+            { id: 5, nama: "Henry Manampiring", alamat: "Jakarta, Indonesia", kontak: "0811 2233 4455", email: "henry@stoisisme.id" }
+        ];
+
+        let publishers = [
+            { id: 1, nama: "Bloomsbury Publishing", alamat: "London, UK", kontak: "+44 20 7631 5600", email: "contact@bloomsbury.com" },
+            { id: 2, nama: "Disney Hyperion", alamat: "New York, USA", kontak: "+1 212 555 0100", email: "info@disneyhyperion.com" },
+            { id: 3, nama: "Gramedia Pustaka Utama", alamat: "Jakarta, Indonesia", kontak: "021 53650110", email: "redaksi@gramediapustakautama.id" },
+            { id: 4, nama: "Bentang Pustaka", alamat: "Yogyakarta, Indonesia", kontak: "0274 735520", email: "bentangpustaka@bentang.com" }
+        ];
+
+        let books = [
+            { id: 1, title: "Harry Potter & Sorcerer Stone", authorId: 1, author: "J.K. Rowling", publisherId: 1, publisher: "Bloomsbury Publishing", genre: "fantasy", genreLabel: "Fantasy", isbn: "9780590353403", year: 1997, stock: 10, avail: 9, image: "https://images.unsplash.com/photo-1618666012174-83b441c0bc76?w=400&auto=format&fit=crop&q=80", description: "Petualangan Harry Potter memasuki sekolah sihir Hogwarts dan mengungkap rahasia besar batu bertuah." },
+            { id: 2, title: "Percy Jackson & The Lightning Thief", authorId: 2, author: "Rick Riordan", publisherId: 2, publisher: "Disney Hyperion", genre: "mythology", genreLabel: "Mythology", isbn: "9780786838654", year: 2005, stock: 8, avail: 8, image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80", description: "Percy Jackson mendapati dirinya adalah seorang demigod dan dituduh mencuri petir utama Dewa Zeus." },
+            { id: 3, title: "Pulang", authorId: 3, author: "Tere Liye", publisherId: 3, publisher: "Gramedia Pustaka Utama", genre: "fiction", genreLabel: "Fiction", isbn: "9786020332116", year: 2015, stock: 12, avail: 12, image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&auto=format&fit=crop&q=80", description: "Kisah Bujang mengarungi pertarungan dunia perbayangan dan perjalanan menemukan arti pulang sejati." },
+            { id: 4, title: "Laskar Pelangi", authorId: 4, author: "Andrea Hirata", publisherId: 4, publisher: "Bentang Pustaka", genre: "fiction", genreLabel: "Fiction", isbn: "9789793062792", year: 2005, stock: 15, avail: 15, image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&auto=format&fit=crop&q=80", description: "Kisah inspiratif sepuluh anak Belitung dan perjuangan luar biasa meraih pendidikan di SD Muhammadiyah." },
+            { id: 5, title: "Filosofi Teras", authorId: 5, author: "Henry Manampiring", publisherId: 3, publisher: "Gramedia Pustaka Utama", genre: "selfhelp", genreLabel: "Self Help", isbn: "9786024248161", year: 2018, stock: 20, avail: 20, image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&auto=format&fit=crop&q=80", description: "Panduan filsafat Stoisisme kuno yang sangat relevan untuk mengatasi kecemasan dan emosi negatif modern." }
+        ];
+
+        let members = [
+            { id: 1, code: "MEM001", ktp: "3271012345670001", nama: "Dilla Salsabila", username: "dillasalsa", email: "heydel@gmail.com", telp: "081299887766", dob: "2002-05-14", alamat: "Jl. Merdeka No. 12, Jakarta", status: "Aktif" },
+            { id: 2, code: "MEM002", ktp: "3271019876540002", nama: "Salsabila Putri", username: "salsaputri", email: "haisalsal@gmail.com", telp: "085711223344", dob: "2003-08-20", alamat: "Jl. Melati No. 45, Bandung", status: "Aktif" }
+        ];
+
+        let loans = [
+            { id: 1, loanNo: "PJN-2026-001", memberCode: "MEM001", memberName: "Dilla Salsabila", bookId: 1, bookTitle: "Harry Potter & Sorcerer Stone", startDate: "2026-10-20", endDate: "2026-10-27", returnDate: null, status: "Dipinjam", condition: "-", fineAmount: 0, payStatus: "Tidak Ada Denda", payMethod: "-" },
+            { id: 2, loanNo: "PJN-2026-002", memberCode: "MEM002", memberName: "Salsabila Putri", bookId: 2, bookTitle: "Percy Jackson & The Lightning Thief", startDate: "2026-10-10", endDate: "2026-10-17", returnDate: "2026-10-17", status: "Dikembalikan", condition: "Baik", fineAmount: 0, payStatus: "Lunas", payMethod: "Cash / Tunai" }
+        ];
+
+        let activeFilter = 'all';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderAllViews();
+            initDates();
+            updateUserHeaderUI();
+        });
+
+        function renderAllViews() {
+            renderCatalog();
+            renderAuthors();
+            renderPublishers();
+            renderMembers();
+            renderLoans();
+        }
+
+        // Owl Mascot Interaction
+        function owlSayHello() {
+            const bubble = document.getElementById('mascot-bubble');
+            const messages = [
+                '🦉 "Huhu! Membaca adalah jendela dunia!"',
+                '🦉 "Cari e-book gratis? menibuks tempatnya!"',
+                '🦉 "Fitur CRUD lengkap kini sudah aktif!"',
+                '🦉 "Klik katalog untuk melihat koleksi lengkap!"'
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            bubble.innerText = randomMsg;
+        }
+
+        // Navigation Controller
+        function navigateTo(pageId) {
+            ['home', 'katalog', 'author', 'penerbit', 'member', 'peminjaman'].forEach(id => {
+                const el = document.getElementById(`page-${id}`);
+                if (el) el.classList.add('hidden');
+                const navBtn = document.getElementById(`nav-${id}`);
+                if (navBtn) {
+                    navBtn.className = "px-4 py-2 rounded-full text-xs font-bold text-purpleTheme-900/70 hover:text-purpleTheme-900 transition";
+                }
+            });
+
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) targetPage.classList.remove('hidden');
+            const activeBtn = document.getElementById(`nav-${pageId}`);
+            if (activeBtn) {
+                activeBtn.className = "px-4 py-2 rounded-full text-xs font-bold text-white bg-purpleTheme-600 shadow-sm transition";
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Header User Profile UI Update
+        function updateUserHeaderUI() {
+            const container = document.getElementById('auth-header-area');
+            if (currentUser) {
+                const initials = currentUser.nama.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                container.innerHTML = `
+                    <div onclick="openModal('modal-profile')" class="flex items-center gap-2.5 bg-white border border-cream-300 p-1.5 pr-4 rounded-full shadow-sm cursor-pointer hover:border-purpleTheme-600 transition">
+                        <div class="w-8 h-8 rounded-full bg-purpleTheme-600 text-white flex items-center justify-center font-bold text-xs uppercase">
+                            ${initials}
+                        </div>
+                        <div>
+                            <span class="block text-xs font-bold text-purpleTheme-900 leading-none">${currentUser.nama}</span>
+                            <span class="text-[9px] font-semibold text-sage-600">@${currentUser.username} (${currentUser.role})</span>
+                        </div>
+                        <i class="fa-solid fa-gear text-purpleTheme-800/40 text-xs ml-1"></i>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <button onclick="openAuthModal('login')" class="bg-purpleTheme-900 hover:bg-purpleTheme-800 text-cream-50 font-brand font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-2xl shadow-md transition flex items-center gap-2.5">
+                        <i class="fa-solid fa-arrow-right-to-bracket text-sage-500"></i>
+                        <span>MASUK / DAFTAR</span>
+                    </button>
+                `;
+            }
+        }
+
+        // ==================== CATALOG & BOOK CRUD ====================
+        function setCatalogFilter(genre) {
+            activeFilter = genre;
+            ['all', 'fantasy', 'fiction', 'mythology', 'selfhelp'].forEach(g => {
+                const btn = document.getElementById(`btn-filter-${g}`);
+                if (btn) btn.className = "cat-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-purpleTheme-900 border border-cream-300 hover:bg-cream-200 transition";
+            });
+            const activeBtn = document.getElementById(`btn-filter-${genre}`);
+            if (activeBtn) activeBtn.className = "cat-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-purpleTheme-600 text-white shadow-sm transition";
+            renderCatalog();
+        }
+
+        function renderCatalog() {
+            const grid = document.getElementById('catalog-grid');
+            const filtered = books.filter(b => activeFilter === 'all' || b.genre === activeFilter);
+
+            grid.innerHTML = filtered.map(b => `
+                <div class="bg-white border border-cream-300 rounded-2xl p-4 flex flex-col justify-between hover:shadow-xl transition group">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-3 relative">
+                            <img src="${b.image}" alt="${b.title}" class="w-full h-56 object-cover group-hover:scale-105 transition duration-300">
+                            <div class="absolute top-2 right-2 flex gap-1">
+                                <button onclick="openBookModal('edit', ${b.id})" title="Edit Buku" class="w-7 h-7 bg-white/90 hover:bg-white text-purpleTheme-900 rounded-lg text-xs flex items-center justify-center shadow-md"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="deleteBook(${b.id})" title="Hapus Buku" class="w-7 h-7 bg-white/90 hover:bg-red-500 hover:text-white text-red-600 rounded-lg text-xs flex items-center justify-center shadow-md"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <span class="text-[9px] font-extrabold px-2.5 py-1 rounded bg-sage-100 text-sage-800 border border-sage-500/20 uppercase">${b.genreLabel}</span>
+                        <h3 class="font-bold text-purpleTheme-900 text-sm mt-2 line-clamp-1">${b.title}</h3>
+                        <p class="text-xs text-purpleTheme-800/60 font-medium mb-1">${b.author}</p>
+                        <p class="text-[10px] text-sage-600 font-semibold mb-2">${b.publisher}</p>
+                    </div>
+                    <div class="pt-3 border-t border-cream-200 flex items-center justify-between">
+                        <span class="text-xs text-purpleTheme-800/70">Stok: <b class="text-sage-600 font-extrabold">${b.avail}/${b.stock}</b></span>
+                        <button onclick="openBookDetail(${b.id})" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white transition shadow-sm">Detail</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function populateBookDropdowns() {
+            const authorSelect = document.getElementById('bf-author');
+            authorSelect.innerHTML = authors.map(a => `<option value="${a.id}">${a.nama}</option>`).join('');
+
+            const pubSelect = document.getElementById('bf-publisher');
+            pubSelect.innerHTML = publishers.map(p => `<option value="${p.id}">${p.nama}</option>`).join('');
+        }
+
+        function openBookModal(mode, id = null) {
+            populateBookDropdowns();
+            if (mode === 'add') {
+                document.getElementById('book-form-title').innerText = "Tambah Buku Baru";
+                document.getElementById('bf-id').value = "";
+                document.getElementById('bf-title').value = "";
+                document.getElementById('bf-isbn').value = "978" + Math.floor(1000000000 + Math.random() * 9000000000);
+                document.getElementById('bf-genre').value = "fantasy";
+                document.getElementById('bf-year').value = "2023";
+                document.getElementById('bf-stock').value = "10";
+                document.getElementById('bf-avail').value = "10";
+                document.getElementById('bf-image').value = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80";
+                document.getElementById('bf-desc').value = "";
+            } else {
+                const b = books.find(x => x.id === id);
+                if (!b) return;
+                document.getElementById('book-form-title').innerText = "Edit Data Buku";
+                document.getElementById('bf-id').value = b.id;
+                document.getElementById('bf-title').value = b.title;
+                document.getElementById('bf-isbn').value = b.isbn;
+                document.getElementById('bf-genre').value = b.genre;
+                document.getElementById('bf-author').value = b.authorId;
+                document.getElementById('bf-publisher').value = b.publisherId;
+                document.getElementById('bf-year').value = b.year;
+                document.getElementById('bf-stock').value = b.stock;
+                document.getElementById('bf-avail').value = b.avail;
+                document.getElementById('bf-image').value = b.image;
+                document.getElementById('bf-desc').value = b.description;
+            }
+            openModal('modal-book-form');
+        }
+
+        function handleBookFormSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('bf-id').value;
+            const authorObj = authors.find(a => a.id == document.getElementById('bf-author').value);
+            const pubObj = publishers.find(p => p.id == document.getElementById('bf-publisher').value);
+            const genreVal = document.getElementById('bf-genre').value;
+            const genreLabels = { fantasy: "Fantasy", fiction: "Fiction", mythology: "Mythology", selfhelp: "Self Help" };
+
+            const data = {
+                id: id ? parseInt(id) : Date.now(),
+                title: document.getElementById('bf-title').value,
+                isbn: document.getElementById('bf-isbn').value,
+                genre: genreVal,
+                genreLabel: genreLabels[genreVal] || "General",
+                authorId: parseInt(document.getElementById('bf-author').value),
+                author: authorObj ? authorObj.nama : "Penulis Unknown",
+                publisherId: parseInt(document.getElementById('bf-publisher').value),
+                publisher: pubObj ? pubObj.nama : "Penerbit Unknown",
+                year: parseInt(document.getElementById('bf-year').value),
+                stock: parseInt(document.getElementById('bf-stock').value),
+                avail: parseInt(document.getElementById('bf-avail').value),
+                image: document.getElementById('bf-image').value,
+                description: document.getElementById('bf-desc').value
+            };
+
+            if (id) {
+                const idx = books.findIndex(b => b.id == id);
+                if (idx !== -1) books[idx] = data;
+            } else {
+                books.push(data);
+            }
+
+            closeModal('modal-book-form');
+            renderCatalog();
+        }
+
+        function deleteBook(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus buku ini dari database?")) {
+                books = books.filter(b => b.id !== id);
+                renderCatalog();
+            }
+        }
+
+        function openBookDetail(id) {
+            const b = books.find(x => x.id === id);
+            if (!b) return;
+
+            document.getElementById('detail-title').innerText = b.title;
+            document.getElementById('detail-author').innerText = b.author;
+            document.getElementById('detail-publisher').innerText = "Penerbit: " + b.publisher;
+            document.getElementById('detail-isbn').innerText = b.isbn;
+            document.getElementById('detail-year').innerText = b.year;
+            document.getElementById('detail-stock').innerText = b.avail + " / " + b.stock + " Eks.";
+            document.getElementById('detail-desc').innerText = b.description;
+            document.getElementById('detail-genre').innerText = b.genreLabel;
+            document.getElementById('detail-img').src = b.image;
+
+            document.getElementById('btn-borrow-now').onclick = () => {
+                closeModal('modal-book-detail');
+                populateLoanSelects();
+                document.getElementById('loan-book-select').value = b.id;
+                openModal('modal-loan');
+            };
+
+            openModal('modal-book-detail');
+        }
+
+        // ==================== AUTHOR CRUD ====================
+        function renderAuthors() {
+            const tbody = document.getElementById('authors-table-body');
+            tbody.innerHTML = authors.map(a => `
+                <tr class="hover:bg-cream-50 transition">
+                    <td class="p-4 font-mono font-bold text-purpleTheme-600">AUT-${String(a.id).padStart(3, '0')}</td>
+                    <td class="p-4 font-bold text-purpleTheme-900">${a.nama}</td>
+                    <td class="p-4 text-purpleTheme-800">${a.alamat}</td>
+                    <td class="p-4 text-purpleTheme-800/80 font-medium">${a.kontak}</td>
+                    <td class="p-4 text-purpleTheme-800/80">${a.email}</td>
+                    <td class="p-4 text-center space-x-1">
+                        <button onclick="openAuthorModal('edit', ${a.id})" class="px-3 py-1 bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white rounded-lg text-xs font-bold transition"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteAuthor(${a.id})" class="px-3 py-1 bg-red-100 text-red-600 hover:bg-red-500 hover:text-white rounded-lg text-xs font-bold transition"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openAuthorModal(mode, id = null) {
+            if (mode === 'add') {
+                document.getElementById('author-form-title').innerText = "Tambah Author";
+                document.getElementById('af-id').value = "";
+                document.getElementById('af-nama').value = "";
+                document.getElementById('af-alamat').value = "";
+                document.getElementById('af-kontak').value = "";
+                document.getElementById('af-email').value = "";
+            } else {
+                const a = authors.find(x => x.id === id);
+                if (!a) return;
+                document.getElementById('author-form-title').innerText = "Edit Data Author";
+                document.getElementById('af-id').value = a.id;
+                document.getElementById('af-nama').value = a.nama;
+                document.getElementById('af-alamat').value = a.alamat;
+                document.getElementById('af-kontak').value = a.kontak;
+                document.getElementById('af-email').value = a.email;
+            }
+            openModal('modal-author-form');
+        }
+
+        function handleAuthorFormSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('af-id').value;
+            const data = {
+                id: id ? parseInt(id) : Date.now(),
+                nama: document.getElementById('af-nama').value,
+                alamat: document.getElementById('af-alamat').value,
+                kontak: document.getElementById('af-kontak').value,
+                email: document.getElementById('af-email').value
+            };
+
+            if (id) {
+                const idx = authors.findIndex(a => a.id == id);
+                if (idx !== -1) authors[idx] = data;
+            } else {
+                authors.push(data);
+            }
+
+            closeModal('modal-author-form');
+            renderAuthors();
+        }
+
+        function deleteAuthor(id) {
+            if (confirm("Hapus data author ini?")) {
+                authors = authors.filter(a => a.id !== id);
+                renderAuthors();
+            }
+        }
+
+        // ==================== PUBLISHER CRUD ====================
+        function renderPublishers() {
+            const tbody = document.getElementById('publishers-table-body');
+            tbody.innerHTML = publishers.map(p => `
+                <tr class="hover:bg-cream-50 transition">
+                    <td class="p-4 font-mono font-bold text-purpleTheme-600">PUB-${String(p.id).padStart(3, '0')}</td>
+                    <td class="p-4 font-bold text-purpleTheme-900">${p.nama}</td>
+                    <td class="p-4 text-purpleTheme-800">${p.alamat}</td>
+                    <td class="p-4 text-purpleTheme-800/80 font-medium">${p.kontak}</td>
+                    <td class="p-4 text-purpleTheme-800/80">${p.email}</td>
+                    <td class="p-4 text-center space-x-1">
+                        <button onclick="openPublisherModal('edit', ${p.id})" class="px-3 py-1 bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white rounded-lg text-xs font-bold transition"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deletePublisher(${p.id})" class="px-3 py-1 bg-red-100 text-red-600 hover:bg-red-500 hover:text-white rounded-lg text-xs font-bold transition"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openPublisherModal(mode, id = null) {
+            if (mode === 'add') {
+                document.getElementById('publisher-form-title').innerText = "Tambah Penerbit";
+                document.getElementById('pf-id').value = "";
+                document.getElementById('pf-nama').value = "";
+                document.getElementById('pf-alamat').value = "";
+                document.getElementById('pf-kontak').value = "";
+                document.getElementById('pf-email').value = "";
+            } else {
+                const p = publishers.find(x => x.id === id);
+                if (!p) return;
+                document.getElementById('publisher-form-title').innerText = "Edit Data Penerbit";
+                document.getElementById('pf-id').value = p.id;
+                document.getElementById('pf-nama').value = p.nama;
+                document.getElementById('pf-alamat').value = p.alamat;
+                document.getElementById('pf-kontak').value = p.kontak;
+                document.getElementById('pf-email').value = p.email;
+            }
+            openModal('modal-publisher-form');
+        }
+
+        function handlePublisherFormSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('pf-id').value;
+            const data = {
+                id: id ? parseInt(id) : Date.now(),
+                nama: document.getElementById('pf-nama').value,
+                alamat: document.getElementById('pf-alamat').value,
+                kontak: document.getElementById('pf-kontak').value,
+                email: document.getElementById('pf-email').value
+            };
+
+            if (id) {
+                const idx = publishers.findIndex(p => p.id == id);
+                if (idx !== -1) publishers[idx] = data;
+            } else {
+                publishers.push(data);
+            }
+
+            closeModal('modal-publisher-form');
+            renderPublishers();
+        }
+
+        function deletePublisher(id) {
+            if (confirm("Hapus data penerbit ini?")) {
+                publishers = publishers.filter(p => p.id !== id);
+                renderPublishers();
+            }
+        }
+
+        // ==================== MEMBER CRUD ====================
+        function renderMembers() {
+            const tbody = document.getElementById('members-table-body');
+            tbody.innerHTML = members.map(m => `
+                <tr class="hover:bg-cream-50 transition">
+                    <td class="p-4 font-mono font-bold text-purpleTheme-600">${m.code}</td>
+                    <td class="p-4 font-mono text-xs text-purpleTheme-800">${m.ktp}</td>
+                    <td class="p-4 font-bold text-purpleTheme-900">${m.nama}</td>
+                    <td class="p-4 text-purpleTheme-800">
+                        <div class="font-medium">@${m.username}</div>
+                        <div class="text-[11px] text-purpleTheme-800/60">${m.email}</div>
+                    </td>
+                    <td class="p-4 text-purpleTheme-800/80">
+                        <div>${m.telp}</div>
+                        <div class="text-[11px] text-purpleTheme-800/60 truncate max-w-[150px]">${m.alamat}</div>
+                    </td>
+                    <td class="p-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold ${m.status === 'Aktif' ? 'bg-sage-100 text-sage-800 border border-sage-500/20' : 'bg-red-100 text-red-700 border border-red-300'}">${m.status}</span>
+                    </td>
+                    <td class="p-4 text-center space-x-1">
+                        <button onclick="quickBorrowForMember('${m.code}')" title="Pinjamkan Buku" class="px-2.5 py-1 bg-purpleTheme-600 text-white hover:bg-purpleTheme-500 rounded-lg text-xs font-bold transition"><i class="fa-solid fa-book-bookmark"></i></button>
+                        <button onclick="openMemberModal('edit', ${m.id})" title="Edit" class="px-2.5 py-1 bg-sage-600 hover:bg-sage-500 text-white rounded-lg text-xs font-bold transition"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteMember(${m.id})" title="Hapus" class="px-2.5 py-1 bg-red-100 text-red-600 hover:bg-red-500 hover:text-white rounded-lg text-xs font-bold transition"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openMemberModal(mode, id = null) {
+            if (mode === 'add') {
+                document.getElementById('member-form-title').innerText = "Registrasi Anggota Baru";
+                document.getElementById('mf-id').value = "";
+                document.getElementById('mf-code').value = "MEM" + String(members.length + 1).padStart(3, '0');
+                document.getElementById('mf-ktp').value = "327101" + Math.floor(100000000 + Math.random() * 900000000);
+                document.getElementById('mf-nama').value = "";
+                document.getElementById('mf-username').value = "";
+                document.getElementById('mf-email').value = "";
+                document.getElementById('mf-telp').value = "";
+                document.getElementById('mf-dob').value = "2000-01-01";
+                document.getElementById('mf-alamat').value = "";
+                document.getElementById('mf-status').value = "Aktif";
+            } else {
+                const m = members.find(x => x.id === id);
+                if (!m) return;
+                document.getElementById('member-form-title').innerText = "Edit Data Anggota";
+                document.getElementById('mf-id').value = m.id;
+                document.getElementById('mf-code').value = m.code;
+                document.getElementById('mf-ktp').value = m.ktp;
+                document.getElementById('mf-nama').value = m.nama;
+                document.getElementById('mf-username').value = m.username;
+                document.getElementById('mf-email').value = m.email;
+                document.getElementById('mf-telp').value = m.telp;
+                document.getElementById('mf-dob').value = m.dob;
+                document.getElementById('mf-alamat').value = m.alamat;
+                document.getElementById('mf-status').value = m.status;
+            }
+            openModal('modal-member-form');
+        }
+
+        function handleMemberFormSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('mf-id').value;
+            const data = {
+                id: id ? parseInt(id) : Date.now(),
+                code: document.getElementById('mf-code').value,
+                ktp: document.getElementById('mf-ktp').value,
+                nama: document.getElementById('mf-nama').value,
+                username: document.getElementById('mf-username').value,
+                email: document.getElementById('mf-email').value,
+                telp: document.getElementById('mf-telp').value,
+                dob: document.getElementById('mf-dob').value,
+                alamat: document.getElementById('mf-alamat').value,
+                status: document.getElementById('mf-status').value
+            };
+
+            if (id) {
+                const idx = members.findIndex(m => m.id == id);
+                if (idx !== -1) members[idx] = data;
+            } else {
+                members.push(data);
+            }
+
+            closeModal('modal-member-form');
+            renderMembers();
+        }
+
+        function deleteMember(id) {
+            if (confirm("Hapus data anggota ini?")) {
+                members = members.filter(m => m.id !== id);
+                renderMembers();
+            }
+        }
+
+        // ==================== CIRCULATION & LOAN CRUD ====================
+        function renderLoans() {
+            const tbody = document.getElementById('loans-table-body');
+            tbody.innerHTML = loans.map(l => `
+                <tr class="hover:bg-cream-50 transition">
+                    <td class="p-4 font-mono font-bold text-purpleTheme-600">${l.loanNo}</td>
+                    <td class="p-4 font-bold text-purpleTheme-900">${l.memberName} <span class="block text-[10px] font-normal text-sage-600">${l.memberCode}</span></td>
+                    <td class="p-4 text-purpleTheme-800 font-medium">${l.bookTitle}</td>
+                    <td class="p-4 text-purpleTheme-800/80 text-xs">
+                        <div>Pinjam: <b>${l.startDate}</b></div>
+                        <div>Kembali: <b>${l.endDate}</b></div>
+                        ${l.returnDate ? `<div class="text-sage-600">Dikembalikan: ${l.returnDate}</div>` : ''}
+                    </td>
+                    <td class="p-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold ${l.status === 'Dipinjam' ? 'bg-amber-500/10 text-amber-700 border border-amber-500/20' : 'bg-sage-100 text-sage-800 border border-sage-500/20'}">${l.status}</span>
+                        ${l.fineAmount > 0 ? `<div class="text-xs text-red-600 font-bold mt-1">Denda: Rp ${l.fineAmount.toLocaleString('id-ID')} (${l.payStatus})</div>` : ''}
+                    </td>
+                    <td class="p-4 text-center space-x-1">
+                        ${l.status === 'Dipinjam' ? `
+                            <button onclick="openReturnModal(${l.id})" class="px-3 py-1 bg-sage-600 hover:bg-sage-500 text-white rounded-lg text-xs font-bold transition">Kembalikan</button>
+                        ` : `
+                            <span class="text-xs text-sage-600 font-bold"><i class="fa-solid fa-check-circle"></i> Selesai</span>
+                        `}
+                        <button onclick="deleteLoan(${l.id})" title="Batal/Hapus" class="px-2 py-1 bg-red-100 text-red-600 hover:bg-red-500 hover:text-white rounded-lg text-xs font-bold transition"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function populateLoanSelects() {
+            const mSelect = document.getElementById('loan-member-select');
+            mSelect.innerHTML = members.map(m => `<option value="${m.code}">${m.nama} (${m.code})</option>`).join('');
+
+            const bSelect = document.getElementById('loan-book-select');
+            bSelect.innerHTML = books.map(b => `<option value="${b.id}">${b.title} (Sisa: ${b.avail})</option>`).join('');
+        }
+
+        function quickBorrowForMember(memberCode) {
+            populateLoanSelects();
+            document.getElementById('loan-member-select').value = memberCode;
+            openModal('modal-loan');
+        }
+
+        function handleLoanSubmit(e) {
+            e.preventDefault();
+            const memberCode = document.getElementById('loan-member-select').value;
+            const memberObj = members.find(m => m.code === memberCode);
+            const bookId = parseInt(document.getElementById('loan-book-select').value);
+            const bookObj = books.find(b => b.id === bookId);
+
+            if (bookObj && bookObj.avail <= 0) {
+                alert("Maaf, stok e-book ini sedang habis!");
+                return;
+            }
+
+            const newLoan = {
+                id: Date.now(),
+                loanNo: "PJN-2026-" + String(loans.length + 1).padStart(3, '0'),
+                memberCode: memberCode,
+                memberName: memberObj ? memberObj.nama : memberCode,
+                bookId: bookId,
+                bookTitle: bookObj ? bookObj.title : "Buku",
+                startDate: document.getElementById('loan-start').value,
+                endDate: document.getElementById('loan-end').value,
+                returnDate: null,
+                status: "Dipinjam",
+                condition: "-",
+                fineAmount: 0,
+                payStatus: "Tidak Ada Denda",
+                payMethod: "-"
+            };
+
+            if (bookObj) bookObj.avail -= 1;
+
+            loans.unshift(newLoan);
+            closeModal('modal-loan');
+            renderLoans();
+            renderCatalog();
+            navigateTo('peminjaman');
+        }
+
+        function openReturnModal(loanId) {
+            const l = loans.find(x => x.id === loanId);
+            if (!l) return;
+
+            document.getElementById('rf-loan-id').value = l.id;
+            document.getElementById('rf-info-member').innerText = `Member: ${l.memberName} (${l.memberCode})`;
+            document.getElementById('rf-info-book').innerText = `Buku: ${l.bookTitle}`;
+
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('rf-date').value = today;
+            document.getElementById('rf-condition').value = "Baik";
+
+            calculateFine();
+            openModal('modal-return');
+        }
+
+        function calculateFine() {
+            const loanId = parseInt(document.getElementById('rf-loan-id').value);
+            const l = loans.find(x => x.id === loanId);
+            if (!l) return;
+
+            const returnDate = new Date(document.getElementById('rf-date').value);
+            const targetDate = new Date(l.endDate);
+            const condition = document.getElementById('rf-condition').value;
+
+            let diffDays = Math.ceil((returnDate - targetDate) / (1000 * 60 * 60 * 24));
+            if (diffDays < 0) diffDays = 0;
+
+            let lateFine = diffDays * 2000;
+            let conditionFine = 0;
+            if (condition === "Rusak") conditionFine = 15000;
+            if (condition === "Hilang") conditionFine = 50000;
+
+            let totalFine = lateFine + conditionFine;
+            document.getElementById('rf-fine-display').innerText = `Rp ${totalFine.toLocaleString('id-ID')}`;
+
+            const payStatusSelect = document.getElementById('rf-pay-status');
+            if (totalFine > 0) {
+                payStatusSelect.value = "Lunas";
+            } else {
+                payStatusSelect.value = "Tidak Ada Denda";
+            }
+        }
+
+        function handleReturnSubmit(e) {
+            e.preventDefault();
+            const loanId = parseInt(document.getElementById('rf-loan-id').value);
+            const l = loans.find(x => x.id === loanId);
+            if (!l) return;
+
+            const fineText = document.getElementById('rf-fine-display').innerText.replace('Rp ', '').replace(/\./g, '');
+
+            l.returnDate = document.getElementById('rf-date').value;
+            l.condition = document.getElementById('rf-condition').value;
+            l.fineAmount = parseInt(fineText) || 0;
+            l.payStatus = document.getElementById('rf-pay-status').value;
+            l.payMethod = document.getElementById('rf-pay-method').value;
+            l.status = "Dikembalikan";
+
+            // Restock Book
+            const b = books.find(x => x.id === l.bookId);
+            if (b && l.condition !== "Hilang") {
+                b.avail = Math.min(b.stock, b.avail + 1);
+            }
+
+            closeModal('modal-return');
+            renderLoans();
+            renderCatalog();
+        }
+
+        function deleteLoan(id) {
+            if (confirm("Hapus / Batalkan data peminjaman ini?")) {
+                loans = loans.filter(l => l.id !== id);
+                renderLoans();
+            }
+        }
+
+        // ==================== AUTH & PROFILE SETTINGS ====================
+        function openAuthModal(mode = 'login') {
+            switchAuthTab(mode);
+            openModal('modal-auth');
+        }
+
+        function switchAuthTab(mode) {
+            const tabLogin = document.getElementById('tab-login');
+            const tabSignup = document.getElementById('tab-signup');
+            const fieldNama = document.getElementById('field-nama');
+            const fieldEmail = document.getElementById('field-email');
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            const btnSubmit = document.getElementById('auth-btn-submit');
+
+            if (mode === 'login') {
+                tabLogin.className = "flex-1 py-2.5 rounded-xl text-xs font-bold transition text-white bg-purpleTheme-600 shadow-sm";
+                tabSignup.className = "flex-1 py-2.5 rounded-xl text-xs font-bold transition text-purpleTheme-900/70 hover:text-purpleTheme-900";
+                fieldNama.classList.add('hidden');
+                fieldEmail.classList.add('hidden');
+                title.innerText = "Selamat Datang Kembali";
+                subtitle.innerText = "Masukkan kredensial Anda untuk mengakses perpustakaan";
+                btnSubmit.innerText = "Masuk Sekarang";
+            } else {
+                tabSignup.className = "flex-1 py-2.5 rounded-xl text-xs font-bold transition text-white bg-purpleTheme-600 shadow-sm";
+                tabLogin.className = "flex-1 py-2.5 rounded-xl text-xs font-bold transition text-purpleTheme-900/70 hover:text-purpleTheme-900";
+                fieldNama.classList.remove('hidden');
+                fieldEmail.classList.remove('hidden');
+                title.innerText = "Buat Akun Menibuks";
+                subtitle.innerText = "Lengkapi data untuk mendapatkan keanggotaan gratis";
+                btnSubmit.innerText = "Daftar Akun Baru";
+            }
+        }
+
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            const username = document.getElementById('auth-username').value || "pengguna";
+            const nama = document.getElementById('auth-nama').value || username;
+            const email = document.getElementById('auth-email').value || `${username}@gmail.com`;
+
+            currentUser = { id: Date.now(), nama, username, email, role: "Member" };
+
+            // Fill Profile modal fields
+            document.getElementById('prof-nama').value = currentUser.nama;
+            document.getElementById('prof-username').value = currentUser.username;
+            document.getElementById('prof-email').value = currentUser.email;
+
+            closeModal('modal-auth');
+            updateUserHeaderUI();
+        }
+
+        function handleProfileUpdate(e) {
+            e.preventDefault();
+            currentUser.nama = document.getElementById('prof-nama').value;
+            currentUser.username = document.getElementById('prof-username').value;
+            currentUser.email = document.getElementById('prof-email').value;
+
+            closeModal('modal-profile');
+            updateUserHeaderUI();
+            alert("Profil berhasil diperbarui!");
+        }
+
+        function logoutUser() {
+            currentUser = null;
+            closeModal('modal-profile');
+            updateUserHeaderUI();
+        }
+
+        // Search & Filter Helper
+        function performHeroSearch() {
+            const query = document.getElementById('hero-search-input').value.toLowerCase();
+            navigateTo('katalog');
+            if (query) {
+                const grid = document.getElementById('catalog-grid');
+                const searched = books.filter(b => 
+                    b.title.toLowerCase().includes(query) || 
+                    b.author.toLowerCase().includes(query) ||
+                    b.publisher.toLowerCase().includes(query) ||
+                    b.genreLabel.toLowerCase().includes(query)
+                );
+
+                grid.innerHTML = searched.length > 0 ? searched.map(b => `
+                    <div class="bg-white border border-cream-300 rounded-2xl p-4 flex flex-col justify-between hover:shadow-xl transition group">
+                        <div>
+                            <img src="${b.image}" alt="${b.title}" class="w-full h-56 object-cover rounded-xl mb-3">
+                            <span class="text-[9px] font-extrabold px-2.5 py-1 rounded bg-sage-100 text-sage-800 border border-sage-500/20 uppercase">${b.genreLabel}</span>
+                            <h3 class="font-bold text-purpleTheme-900 text-sm mt-2 line-clamp-1">${b.title}</h3>
+                            <p class="text-xs text-purpleTheme-800/60 font-medium mb-2">${b.author}</p>
+                        </div>
+                        <div class="pt-3 border-t border-cream-200 flex items-center justify-between">
+                            <span class="text-xs text-purpleTheme-800/70">Stok: <b class="text-sage-600 font-extrabold">${b.avail}/${b.stock}</b></span>
+                            <button onclick="openBookDetail(${b.id})" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purpleTheme-600 hover:bg-purpleTheme-500 text-white transition">Detail</button>
+                        </div>
+                    </div>
+                `).join('') : `<p class="col-span-full text-center py-8 text-sm text-purpleTheme-800/60 font-bold">Buku yang Anda cari tidak ditemukan.</p>`;
+            }
+        }
+
+        function filterByGenre(genre) {
+            navigateTo('katalog');
+            setCatalogFilter(genre);
+        }
+
+        // Modal Utilities
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function initDates() {
+            const today = new Date().toISOString().split('T')[0];
+            const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+            if(document.getElementById('loan-start')) document.getElementById('loan-start').value = today;
+            if(document.getElementById('loan-end')) document.getElementById('loan-end').value = nextWeek;
+        }
+    </script>
+</body>
+</html>
